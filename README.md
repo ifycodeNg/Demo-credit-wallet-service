@@ -1,4 +1,4 @@
-##Demo Credit Wallet Service
+## Demo Credit Wallet Service
 
 
 ## Database Management
@@ -12,7 +12,7 @@
 
 
 ## Folder Structure
-
+```
 ├── config                          # env vars etc
 |── bin              
     ├── www.js                      # server entry file
@@ -25,3 +25,4 @@
 ├── README.md
 ├── app.js                          # server file
 ├── knexfile.js                     # Knex config file
+```
