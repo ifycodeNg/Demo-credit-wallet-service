@@ -1,0 +1,60 @@
+{
+  "name": "demoserviceapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js",
+    "dev": "nodemon --watch './**/*.js' app.js",
+    "lint": "eslint --ext .js",
+    "lint:fix": "eslint --fix",
+    "check:format": "prettier  --check \"*/**/*.+(js|json)\"",
+    "format": "prettier  --write \"*/**/*.+(js|json)\"",
+    "prettier": "prettier  --write",
+    "test": "mocha --reporter spec",
+    "prepare": "husky --install && husky install"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
+    "express": "~4.16.1",
+    "knex": "^2.3.0",
+    "morgan": "~1.9.1",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  },
+  "lint-staged": {
+    "*/**/*.js": [
+      "npm run lint",
+      "npm run format"
+    ]
+  },
+  "description": "Demo credit wallet service",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:ifycodeNg/Demo-credit-wallet-service.git"
+  },
+  "author": "Ugwumba Ifeanyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ifycodeNg/Demo-credit-wallet-service/issues"
+  },
+  "homepage": "https://github.com/ifycodeNg/Demo-credit-wallet-service#readme"
+}
