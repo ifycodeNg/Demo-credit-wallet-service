@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js",
-    "dev": "nodemon --watch './**/*.js' app.js",
+    "start": "node ./bin/www",
+    "dev": "nodemon --watch ./bin/www",
     "lint": "eslint --ext .js",
     "lint:fix": "eslint --fix",
     "check:format": "prettier  --check \"*/**/*.+(js|json)\"",
@@ -14,10 +14,13 @@
     "prepare": "husky --install && husky install"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
     "express": "~4.16.1",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^2.3.0",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3"
@@ -43,7 +46,6 @@
     ]
   },
   "description": "Demo credit wallet service",
-  "main": "app.js",
   "directories": {
     "test": "test"
   },
