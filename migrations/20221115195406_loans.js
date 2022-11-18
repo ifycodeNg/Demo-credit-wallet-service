@@ -6,9 +6,10 @@ exports.up = async function (knex) {
   try {
     await knex.schema.createTable('loans', (tbl) => {
       tbl.increments('loan_id');
-      tbl.integer('amount', 11);
+      tbl.bigint('amount', 11);
       tbl.decimal('balance_before');
       tbl.decimal('balance_after');
+      tbl.enu('transaction_type', ['loan', 'repayment']);
       tbl.integer('account_id').unsigned();
       tbl.foreign('account_id').references('accounts.account_id');
       tbl.timestamp('created_at', { precision: 6 }).defaultTo(knex.fn.now(6));
