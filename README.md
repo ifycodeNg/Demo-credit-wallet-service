@@ -15,6 +15,9 @@
 - Database variable and 3rd party parameters e.g in snake_case
 - Application variable in camalCase
 
+## Payment gateway used 
+- [flutterwave](https://flutterwave.com/ng/)
+
 
 ## Folder Structure
 ```
