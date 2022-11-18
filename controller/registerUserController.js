@@ -15,7 +15,7 @@ const registerUserController = async (req, res) => {
     pword: joi.string().required(),
     lastName: joi.string().required(),
     firstName: joi.string().required(),
-    mobileNumber: joi.number().required(),
+    mobileNumber: joi.number().min(11).required(),
     address: joi.string().required(),
 
   });
@@ -97,13 +97,26 @@ const registerUserController = async (req, res) => {
         msg: 'Error Creating Account',
       });
     }
-    const token = Jwt.sign({ userId: accountData.user_id }, config.jwt.ACCESS_TOKEN_SECRET, {
-      expiresIn: '7d',
-    });
+    const token = Jwt.sign(
+      { userId: accountData.user_id, accountId: createAccount[0] },
+      config.jwt.ACCESS_TOKEN_SECRET,
+
+      {
+        expiresIn: '7d',
+      },
+    );
+
     res.type('application/json');
     return res.status(201).json({
       success: true,
+      email,
+      firstName,
+      lastName,
+      phoneNumber: mobileNumber,
+      accountNumber: mobileNumber,
+      address,
       token,
+
       msg: 'User account created',
 
     });
