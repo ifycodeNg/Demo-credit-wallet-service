@@ -38,6 +38,9 @@ const withDrawalController = require('../controller/withDrawalController');
 const transactionHistory = require('../controller/transactionHistory');
 const getAllBankController = require('../controller/getAllBankController');
 
+router.get('/', (req, res) => {
+  res.send('Welcome to Demo credit');
+});
 /* POST Registeration. */
 router.post('/register', registerController);
 /* POST Login. */
