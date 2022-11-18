@@ -10,6 +10,11 @@
 
 ![ER Diagram for DB](/mock/databaseDesign.png)
 
+## Naming convention used in application
+
+- Database variable and 3rd party parameters e.g in snake_case
+- Application variable in camalCase
+
 
 ## Folder Structure
 ```
@@ -20,8 +25,9 @@
 ├── migrations                      # migration files 
 ├── mock                            # mock image
 ├── model                           # database adapter 
-├── Routes                          # route controllers for all the endpoints of the app 
-├── Services                        # All the business logic is here 
+├── routes                          # route controllers for all the endpoints of the app 
+├── services                        # utility file
+├── test                            # test file
 ├── README.md
 ├── app.js                          # server file
 ├── knexfile.js                     # Knex config file
