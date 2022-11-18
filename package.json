@@ -10,7 +10,7 @@
     "check:format": "prettier  --check \"*/**/*.+(js|json)\"",
     "format": "prettier  --write \"*/**/*.+(js|json)\"",
     "prettier": "prettier  --write",
-    "test": "mocha --reporter spec",
+    "test": "mocha --reporter spec --timeout 10000",
     "prepare": "husky --install && husky install"
   },
   "dependencies": {
