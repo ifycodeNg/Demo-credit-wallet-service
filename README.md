@@ -35,3 +35,5 @@
 ├── app.js                          # server file
 ├── knexfile.js                     # Knex config file
 ```
+## Backend
+- [Nginx](https://www.nginx.com/) used as reverse proxy
