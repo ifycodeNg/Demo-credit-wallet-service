@@ -23,7 +23,7 @@ describe('Withdrawal of funds from wallet', () => {
       .post('/api/v0/withdraw/funds')
       .set('Authorization', `Bearer ${config.token}`)
       .send(requestBody)
-      console.log(response)
+     
       .end((err, response) => {
         response.should.have.status(201);
         response.body.should.be.a('object');

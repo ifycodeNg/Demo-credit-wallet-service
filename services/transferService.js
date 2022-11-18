@@ -5,6 +5,15 @@ const { config } = require('../config/config');
 
 const flw = new Flutterwave(config.publicKey, config.secretKey);
 
+/**
+ *
+ * @param {integer} amount amount to be credited to account
+ * @param {integer} accountId accountId of the creditor
+ * @param {string} purpose purpose transaction purpose
+ * @param {integer} reference reference reference number of transaction
+ * @param {object} trx transaction object
+ * @returns {object}
+ */
 async function creditAccount({
   amount, accountId, purpose, trx, reference,
 }) {
@@ -26,6 +35,15 @@ async function creditAccount({
   };
 }
 
+/**
+ *
+ * @param {integer} amount amount to be debited from account
+ * @param {integer} accountId accountId of the debitor
+ * @param {string} purpose purpose transaction purpose
+ * @param {integer} reference reference reference number of transaction
+ * @param {object} trx transaction object
+ * @returns {object}
+ */
 async function debitAccount({
   amount, accountId, purpose, trx, reference,
 }) {
@@ -47,6 +65,18 @@ async function debitAccount({
   };
 }
 
+/**
+ *
+ * @param {integer} cardNumber card number
+ * @param {integer} expiryMonth expiry Month of card
+ * @param {integer} expiryYear expiry year of card
+ * @param {integer} pin pin of card
+ * @param {integer} amount amount to be charged
+ * @param {string} fullName full Name of card holder
+ * @param {string} email email of card holder
+ * @param {integer} phoneNumber phone Number of card holder
+ * @returns {object}
+ */
 async function chargeCard({
   cardNumber: card_number, cvv,
   expiryMonth: expiry_month,
@@ -102,6 +132,15 @@ async function chargeCard({
   }
 }
 
+/**
+ *
+ * @param {integer} otp Totp sent to card holder phone
+ * @param {string} flwRef transaction reference
+ * @param {integer} userId userId of card holder
+ * @param {object} trx database transaction object
+ * @returns {object}
+ */
+
 async function validateTransaction({
   otp, flwRef: flw_ref, userId, trx,
 }) {
@@ -119,16 +158,6 @@ async function validateTransaction({
         const purpose = 'transfer';
         const getRecipentAccount = await db('accounts').where('user_Id', userId);
         const accountId = getRecipentAccount[0].account_id;
-        /**
-   *
-   * @param {amount} amount amount transferred into wallet by the user
-    * @param {accountId} accountId account_id of the user
-    * @param  {purpose} purpose purpose of transfer
-    * @param  {trx} amount amount transferred into wallet of the user
-    * @param  {reference} reference reference Id of the transaction
-   * @returns {boolean,string}
-   *
-   */
         const creditUserWallet = await creditAccount({
           amount, accountId, purpose, trx, reference,
         });
@@ -156,6 +185,17 @@ async function validateTransaction({
     msg: 'Error encountered',
   };
 }
+/**
+ *
+ * @param {integer} accountBank This is the recipient bank code
+ * @param {integer} accountNumber expiry Month of card
+ * @param {integer} expiryYear expiry year of card
+ * @param {string} narration narration of withdrawal
+ * @param {integer} amount amount to be withdrawn
+ * @param {integer} accountId accountId of user
+ * @param {object} trx database transaction object
+ * @returns {object}
+ */
 async function withdrawal({
   accountBank: account_bank,
   accountNumber: account_number,
@@ -166,7 +206,7 @@ async function withdrawal({
 }) {
   try {
     const payload = {
-      account_bank, // This is the recipient bank code. Get list here :https://developer.flutterwave.com/v3.0/reference#get-all-banks
+      account_bank, 
       account_number,
       amount,
       narration,
