@@ -55,7 +55,10 @@ const fundWalletController = async (req, res) => {
       msg: 'Loan granted successfully',
     });
   } catch (err) {
-    throw Error('Error Encountered');
+    return res.status(200).json({
+      success: false,
+      msg: 'Error Encountered',
+    });
   }
 };
 module.exports = fundWalletController;

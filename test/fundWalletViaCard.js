@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
-
+const {config} = require('../config/config');
 // Assertion Style
 chai.should();
 chai.use(chaiHttp);
@@ -22,7 +22,7 @@ describe('Fund Account via card', () => {
     };
     chai.request(server)
       .post('/api/v0/fund/wallet/card')
-      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImFjY291bnRJZCI6MiwiaWF0IjoxNjY4NzA1MzAzLCJleHAiOjE2NjkzMTAxMDN9.NSyFUfnpmwANaHqgGWBl5TBqmxDrNdaF5PQ3PbtAe50')
+      .set('Authorization', `Bearer ${config.token}`)
       .send(requestBody)
       .end((err, response) => {
         response.should.have.status(201);
@@ -49,7 +49,7 @@ describe('Fund Account via card', () => {
     };
     chai.request(server)
       .post('/api/v0/fund/wallet/card')
-      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImFjY291bnRJZCI6MiwiaWF0IjoxNjY4NzA1MzAzLCJleHAiOjE2NjkzMTAxMDN9.NSyFUfnpmwANaHqgGWBl5TBqmxDrNdaF5PQ3PbtAe50')
+      .set('Authorization', `Bearer ${config.token}`)
       .send(requestBody)
       .end((err, response) => {
         response.should.have.status(200);
@@ -74,7 +74,7 @@ describe('Fund Account via card', () => {
     };
     chai.request(server)
       .post('/api/v0/fund/wallet/card')
-      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImFjY291bnRJZCI6MiwiaWF0IjoxNjY4NzA1MzAzLCJleHAiOjE2NjkzMTAxMDN9.NSyFUfnpmwANaHqgGWBl5TBqmxDrNdaF5PQ3PbtAe50')
+      .set('Authorization', `Bearer ${config.token}`)
       .send(requestBody)
       .end((err, response) => {
         response.should.have.status(200);

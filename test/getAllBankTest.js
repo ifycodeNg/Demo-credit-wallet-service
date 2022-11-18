@@ -6,7 +6,7 @@ const server = require('../app');
 chai.should();
 chai.use(chaiHttp);
 
-describe('Get account balance', () => {
+describe('Get all banks', () => {
 /**
  * Test to the fetch all banks in nigeria endpoint
  */
