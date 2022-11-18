@@ -3,6 +3,7 @@ exports.config = {
   publicKey: process.env.FLW_PUBLIC_KEY,
   secretKey: process.env.FLW_SECRET_KEY,
   secret: process.env.secret,
+  token: process.env.token,
   redisSecret: process.env.redisSecret,
   EncryptionKey: process.env.ENCRYPTION_KEY,
   BASE_API_URL: process.env.BASE_API_URL,

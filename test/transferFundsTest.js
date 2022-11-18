@@ -7,20 +7,22 @@ const { config } = require('../config/config');
 chai.should();
 chai.use(chaiHttp);
 
-describe('Repayment of loan', () => {
+describe('Transfer funds to other users wallet within Demo Credit', () => {
 /**
- * Test the fund wallet via card endpoint
+ * Test Transfer funds to other users wallet within Demo Credit endpoint
  */
 
-  it('Repayment of loan endpoint', (done) => {
+  it('sucessful transfer', (done) => {
     const requestBody = {
-      amount: 10000,
+      accountNumber: '08059283540',
+      amount: 5000,
     };
     chai.request(server)
-      .post('/api/v0/repayment/loan')
+      .post('/api/v0/transfer/funds')
       .set('Authorization', `Bearer ${config.token}`)
       .send(requestBody)
       .end((err, response) => {
+        console.log(response)
         response.should.have.status(201);
         response.body.should.be.a('object');
         response.body.should.have.property('success').eq(true);
@@ -31,15 +33,16 @@ describe('Repayment of loan', () => {
   });
 
   /**
-   * Test the repayment of loan endpoint with incorrect body key value
+   * Test Transfer of funds to other users wallet within Demo Credit with incorrect body key value
    */
 
-  it('Test the repayment of loan endpoint with incorrect body key value', (done) => {
+  it('failed transfer', (done) => {
     const requestBody = {
+      accountNumber: '08059283533',
       amount: 'abc',
     };
     chai.request(server)
-      .post('/api/v0/repayment/loan')
+      .post('/api/v0/transfer/funds')
       .set('Authorization', `Bearer ${config.token}`)
       .send(requestBody)
       .end((err, response) => {
@@ -53,15 +56,16 @@ describe('Repayment of loan', () => {
   });
 
   /**
-   * Test the repayment of loan endpoint with incorrect body keys
+   * Test Transfer of funds to other users wallet within Demo Credit with wrong body key
    */
 
-  it('Test the repayment of loan endpoint with incorrect body keys', (done) => {
+  it('reject transfer', (done) => {
     const requestBody = {
-      amountLoan: 10000,
+      accountNumber: '08059283533',
+      amountTransfer: '5000',
     };
     chai.request(server)
-      .post('/api/v0/repayment/loan')
+      .post('/api/v0/transfer/funds')
       .set('Authorization', `Bearer ${config.token}`)
       .send(requestBody)
       .end((err, response) => {
@@ -75,15 +79,38 @@ describe('Repayment of loan', () => {
   });
 
   /**
-   * Test the repayment of loan endpoint without Token
+   * Test Transfer of funds to other users wallet within Demo Credit tests with invalid walletNumber
    */
 
-  it('Test the repayment of loan endpoint without Token', (done) => {
+  it('tests with invalid walletNumber', (done) => {
+    const requestBody = {
+      accountNumber: '08059283533',
+      amountTransfer: '5000',
+    };
+    chai.request(server)
+      .post('/api/v0/transfer/funds')
+      .set('Authorization', `Bearer ${config.token}`)
+      .send(requestBody)
+      .end((err, response) => {
+        response.should.have.status(200);
+        response.body.should.be.a('object');
+        response.body.should.have.property('success').eq(false);
+        response.body.should.have.property('msg');
+
+        done();
+      });
+  });
+
+  /**
+   * Test Transfer of funds to other users wallet within Demo Credit without token
+   */
+
+  it('Transfer loan from user wallet to persoanl/other account without token', (done) => {
     const requestBody = {
       amount: 10000,
     };
     chai.request(server)
-      .post('/api/v0/repayment/loan')
+      .post('/api/v0/transfer/funds')
       .send(requestBody)
       .end((err, response) => {
         response.should.have.status(403);
