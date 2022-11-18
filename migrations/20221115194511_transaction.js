@@ -6,8 +6,8 @@ exports.up = async function (knex) {
   try {
     await knex.schema.createTable('transactions', (tbl) => {
       tbl.increments('txn_id');
-      tbl.bigInteger('reference_id');
-      tbl.integer('amount', 11);
+      tbl.string('reference_id').notNullable();
+      tbl.bigint('amount', 11);
       tbl.decimal('balance_before');
       tbl.enu('transaction_type', ['debit', 'credit']);
       tbl.enu('transaction_purpose', ['deposit', 'transfer', 'withdrawal']);
