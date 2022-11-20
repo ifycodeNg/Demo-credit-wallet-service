@@ -23,7 +23,7 @@ const fundWalletController = async (req, res) => {
     const trx = await db.transaction();
     const getLoanAccount = await db('loans').where('account_id', accountId);
     if (!getLoanAccount[0]) {
-      await db('loans').insert({
+      await trx('loans').insert({
         amount: loanAmount,
         account_id: accountId,
         balance_after: loanAmount,
@@ -37,7 +37,7 @@ const fundWalletController = async (req, res) => {
         msg: 'Loan granted successfully',
       });
     }
-    await db('loans').insert({
+    await trx('loans').insert({
       amount: loanAmount,
       account_id: accountId,
       balance_after:
